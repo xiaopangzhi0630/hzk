@@ -30,13 +30,15 @@ class Login extends Component {
 
         const { history } = this.props
 
-        // console.log(this.state)  // 怎么来的???
-        const body = this.state    //  问题????
+        // console.log(this.state)  //
+        const body = this.state    //在constructor中声明的数据
 
         const res = await axios.post(`users/login`, body)
         // console.log(res)
-        const { meta, data } = res.data
+        const { meta, data } = res
         if (meta.status === 200) {
+            // 登录成功之后,保存token
+            localStorage.setItem('token', data.token)
             // 去 / home
             history.push('/')
             // console.log(this.props)
